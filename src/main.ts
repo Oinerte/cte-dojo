@@ -2,12 +2,12 @@ import { PrismaClient } from "@prisma/client";
 import { seed } from "./seed";
 import { UpdateTotalBoardStatusService } from "./service";
 // import { WithCteService } from "./with-cte-service";
-// import { WithPrismaService } from "./with-prisma-service";
+import { WithPrismaService } from "./with-prisma-service";
 // import { WithTsLogic as WithTsLogicService } from "./with-ts-logic";
 import { BaseService } from "./base-service";
 import { SeedInput } from "./dto/seed.input";
 import { RefactoredService } from "./refactored-service";
-// import { validateAnswer } from "./validate-answer";
+import { validateAnswer } from "./validate-answer";
 
 async function testService({
   Service,
@@ -20,6 +20,7 @@ async function testService({
   seedInput: SeedInput;
   prisma: PrismaClient;
 }) {
+  console.log(`\n---- INICIANDO TESTE ------`);
   let boardIds = await seed(seedInput);
   const service = new Service(prisma);
 
@@ -28,7 +29,7 @@ async function testService({
   const end = Date.now();
   console.log(`${serviceName} demorou ${end - start} ms`);
 
-  // await validateAnswer({ prisma, boardIds });
+  await validateAnswer({ prisma, boardIds });
 }
 
 async function main() {
@@ -75,6 +76,7 @@ async function main() {
   // Resolução usando CTEs demorou 45 ms
 
   // teste 3
+  */
 
   await testService({
     Service: WithPrismaService,
@@ -83,6 +85,8 @@ async function main() {
     prisma,
   });
   // Resolução usando Prisma demorou 267 ms
+
+  /*
 
   // teste 4
   await testService({

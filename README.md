@@ -29,7 +29,19 @@ Siga os passos abaixo para rodar o projeto e executar os testes:
    pnpm install
    ```
 
-2. Execute os testes rodando o seguinte comando:
+2. Suba o Docker:
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+3. Migre o banco:
+
+   ```bash
+   npm run migrate:dev
+   ```
+
+4. Execute os testes rodando o seguinte comando:
 
    ```bash
    npm run start
@@ -44,3 +56,17 @@ Siga os passos abaixo para rodar o projeto e executar os testes:
 
 - SQL Server
 - TypeScript
+
+## Objetivo
+
+O objetivo é calcular:
+
+- totalActions (total de ações do board)
+- totalTasks (total de tarefas do board)
+- tasksDone (total de tarefas concluídas do board)
+- actionsDone (total de ações concluídas do board - todas tarefas concluídas)
+
+Observações:
+- ação não é considerada concluída caso ela não tenha tarefas
+- Uma ação pode estar em vários boards, e um board tem várias ações
+- O board completar uma tarefa não afeta em outros boards
